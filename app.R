@@ -213,7 +213,7 @@ set.seed(123)
            )
    
            ################################################################################################################
-           ########### STEP 3. Optimise the aquisition to find the next design points #############################
+           ########### Optimise the aquisition to find the next design points #############################
            ################################################################################################################
    
    
@@ -249,17 +249,13 @@ set.seed(123)
            showNotification(paste0("Something went wrong! Please make sure you entered correct values."), type = "err")
          }
        )
-     }) # End of 1st run
+     }) # End of observation 3
    
    
    
      observe({
-   
-   
-       # req(values$RES)
+  
        req(input$run)
-   
-   
        df_text1(
          paste0("PLEASE SET UP YOUR NEXT ADAPTIVE EXPERIMENT(S) AT ONE OR MORE OF THE FOLLOWING SETTINGS: ")
        )
@@ -274,31 +270,15 @@ set.seed(123)
    
      output$setting <- renderTable({ # Report based on the run
    
-       # req(values$RES)
+      
        req(input$run)
    
        rbind(values$RES1, values$RES2, values$RES3, values$RES4)
      })
    
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
      max_response <- reactive({
+        
        req(input$run)
        req(!is.null(values$RES1))
    
@@ -306,11 +286,11 @@ set.seed(123)
        Dataset <- read.csv(input$datafile$datapath)
    
        prior_response <- -Dataset[, input$dvar]
-       # prior_response = -data()[,4]
        max_response <- -min(prior_response)
+        
        return(max_response)
      })
-     #
+     
      min_response <- reactive({
        req(input$run)
        req(!is.null(values$RES1))
@@ -322,9 +302,8 @@ set.seed(123)
        min_response <- -max(prior_response)
        return(min_response)
      })
-     #
-     #
-     #
+    
+      
      output$plot <- renderPlot({
        req(input$run)
        req(!is.null(values$RES1))
@@ -343,14 +322,7 @@ set.seed(123)
    
        p + theme_bw() + theme(text = element_text(size = 20))
      })
-     #
-   
-   
-   
-   
-   
-   
-   
+    
    
    
    
@@ -363,7 +335,7 @@ set.seed(123)
    
      # Reset all inputs:
      observeEvent(input$datafile, { # 4 Reseting everything when a new dataset is observed
-       #
+     
    
        df_text(NULL)
        values$DF <- NULL
@@ -373,8 +345,8 @@ set.seed(123)
        values$RES2 <- NULL
        values$RES3 <- NULL
        values$RES4 <- NULL
-     }) # End of observaion 4
-  # ,
+     }) # End of observation 4
+  ,
 }
 
 # Run the application
