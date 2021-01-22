@@ -1,4 +1,5 @@
 rm(list = ls())
+# devtools::install_version("DiceOptim", version = "2.0")
 library(DiceOptim)
 library(ggplot2)
 library(dplyr)
@@ -346,7 +347,6 @@ set.seed(123)
        values$RES3 <- NULL
        values$RES4 <- NULL
      }) # End of observation 4
-  ,
 }
 
 # Run the application
